@@ -16,13 +16,19 @@ import { ScannerComponent } from './scanner/scanner.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { DisplayQrComponent } from './display-qr/display-qr.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ScannerComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    NavbarComponent,
+    DisplayQrComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

@@ -13,8 +13,6 @@ import { first } from 'rxjs/operators';
 export class LoginComponent implements OnInit {
 
   toggleOn = false;
-  submitted = false;
-  returnUrl: string;
   data={}
 
 
@@ -29,7 +27,7 @@ export class LoginComponent implements OnInit {
         this.data ={}
         this.data['mobile_number'] = this.loginForm.controls['mobile_number'].value
 
-        this.http.post<any>("https://cvcapi.herokuapp.com/v1/send_otp",this.data ).subscribe(data => {
+        this.http.post<any>("https://conviscard.herokuapp.com/v1/send_otp",this.data ).subscribe(data => {
           console.log(data)
         
       })
@@ -38,8 +36,12 @@ export class LoginComponent implements OnInit {
        this.data = this.loginForm.value
        this.data['action'] =  'log_in'
 
-       this.http.post<any>("https://cvcapi.herokuapp.com/v1/validate_otp",this.data ).subscribe(data => {
+       this.http.post<any>("https://conviscard.herokuapp.com/v1/validate_otp",this.data ).subscribe(data => {
         console.log(data)
+
+        localStorage.setItem('userData', JSON.stringify(data));
+
+        
         this.route.navigateByUrl('scan');
 
       
