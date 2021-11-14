@@ -8,33 +8,44 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./scanner.component.scss']
 })
 export class ScannerComponent implements OnInit {
-  scanResult: JSON
+  scanResult: any
   apiResponse: string='';
-  information: string = "No se ha detectado información de ningún código. Acerque un código QR para escanear.";
-  transports: []
-
-
   scannerEnabled: boolean = true;
 
+      // var userData = localStorage.getItem('userData');
+    // var parsedData =JSON.parse(userData);
 
-  scanSuccessHandler(result:JSON)
+    // console.log('retrievedObject: ', JSON.parse(userData));
+    // this.base64_string = parsedData.qrImage
+
+    userData:string = localStorage.getItem('userData')
+    parsedData =JSON.parse(this.userData);
+    personName:string =""
+
+
+
+    onCodeResult(result:string)
   { 
+
+
     this.scannerEnabled = false;
-     this.scanResult=result;
-     const headers = { 'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMyJ9.-456i7F6ZX9H-qeDw5eOPkNT4Opp4ofTD9hij0tvKp4' };
-     const body =  { id: this.scanResult }
-     const url = 'https://cvcapi.herokuapp.com/v1/scan'
-     this.apiResponse = "Scan successful "
+     this.scanResult=JSON.parse(result);
+    
+     const headers = { 'Authorization': this.parsedData.token };
+     const body =  { id: this.scanResult.id }
+
+     const url = 'https://conviscard.herokuapp.com/v1/scan'
+     this.personName = this.scanResult.Name
+     console.log(body)
 
 
-  //    this.http.post<any>(url,body, {headers}).subscribe(data => {
-  //     this.apiResponse="Result for scan id "+this.scanResult +"is" + data.status
-  // })
+     this.http.post<any>(url,body, {headers}).subscribe(data => {
+      this.apiResponse="Result :" + data.status
+  })
   }
 
   public enableScanner() {
     this.scannerEnabled = !this.scannerEnabled;
-    this.information = "No se ha detectado información de ningún código. Acerque un código QR para escanear.";
   }
 
   

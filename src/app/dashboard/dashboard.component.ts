@@ -8,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 export class DashboardComponent implements OnInit {
 
   constructor() { }
-  base64_string:any 
+  displayScan:boolean = false 
+  buttonLabel = "Open QR Scanner"
+
+  toggleQRCode(){
+      this.displayScan = !this.displayScan
+      if (this.displayScan){
+        this.buttonLabel = "Close QR Scanner"
+      }
+      else{
+        this.buttonLabel= "Open QR Scanner"
+      }
+
+  }
 
   ngOnInit(): void {
+
+    
     // var userData = localStorage.getItem('userData');
     // var parsedData =JSON.parse(userData);
 
