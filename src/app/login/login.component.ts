@@ -27,6 +27,8 @@ export class LoginComponent implements OnInit {
         this.data ={}
         this.data['mobile_number'] = this.loginForm.controls['mobile_number'].value
 
+    
+
         this.http.post<any>("https://conviscard.herokuapp.com/v1/send_otp",this.data ).subscribe(data => {
           console.log(data)
         
@@ -45,6 +47,11 @@ export class LoginComponent implements OnInit {
         this.route.navigateByUrl('scan');
 
       
+    }, (error) => {                              //Error callback
+      console.error('error caught in component', error)
+
+
+      //throw error;   //You can also throw the error to a global error handler
     })
 
 

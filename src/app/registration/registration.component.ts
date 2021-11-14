@@ -33,7 +33,7 @@ export class RegistrationComponent implements OnInit {
 
         this.http.post<any>("https://conviscard.herokuapp.com/v1/registration",this.data ).subscribe(data => {
           console.log(data)
-          alert("Success")
+          alert(data.status)
         
       })
 
